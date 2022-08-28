@@ -131,4 +131,4 @@ git push origin $currentBranch
 git push origin $newVersion
 
 # print success message
-printf "\n✅ Done!\n"
+printf "\n✅ ${green}Done!${normal}\n"

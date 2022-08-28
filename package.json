@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "release": "cat ./release-version.sh | bash -s"
+  }
+}

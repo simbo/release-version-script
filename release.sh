@@ -1,15 +1,22 @@
 #!/bin/bash
 
 # vars for colors
-term=${TERM:-"dumb"}
-red=$(tput -T$term setaf 1)
-green=$(tput -T$term setaf 2)
-yellow=$(tput -T$term setaf 3)
-blue=$(tput -T$term setaf 12)
-gray=$(tput -T$term setaf 8)
-bold=$(tput -T$term bold)
-underline=$(tput -T$term smul)
-normal=$(tput -T$term sgr0)
+red=$(tput -T${TERM:-"dumb"} setaf 1)
+green=$(tput -T${TERM:-"dumb"} setaf 2)
+yellow=$(tput -T${TERM:-"dumb"} setaf 3)
+magenta=$(tput -T${TERM:-"dumb"} setaf 5)
+blue=$(tput -T${TERM:-"dumb"} setaf 12)
+gray=$(tput -T${TERM:-"dumb"} setaf 8)
+bold=$(tput -T${TERM:-"dumb"} bold)
+underline=$(tput -T${TERM:-"dumb"} smul)
+normal=$(tput -T${TERM:-"dumb"} sgr0)
+
+function displayBanner() {
+  printf "\n${magenta}┌───────────────────────────────────────────────────┐${normal}"
+  printf "\n${magenta}│  ${yellow}RELEASE VERSION SCRIPT${magenta}                           │${normal}"
+  printf "\n${magenta}│  ${blue}${underline}https://github.com/simbo/release-version-script${normal}${magenta}  │${normal}"
+  printf "\n${magenta}└───────────────────────────────────────────────────┘${normal}"
+}
 
 # print error message and exit
 function error() {
@@ -31,10 +38,11 @@ semverUpdate=$(echo "$1" | tr [A-Z] [a-z])
 
 # display usage info if params are not set or invalid
 if ! [[ "$semverUpdate" = "major" || "$semverUpdate" = "minor" || "$semverUpdate" = "patch" ]]; then
-  command=$([[ "$0" = "bash" ]] && echo "curl -s https://raw.githubusercontent.com/simbo/release-version-script/latest/release-version.sh | bash -s" || echo $0)
-  printf "\n${yellow}${bold}release version script${normal}"
-  printf "\n${blue}${underline}https://github.com/simbo/release-version-script${normal}"
+  displayBanner
+  printf "\n   ${gray}Author: Simon Lepel ${underline}https://simbo.de/${normal}"
+  printf "\n   ${gray}License: MIT ${underline}http://simbo.mit-license.org/${normal}"
   printf "\n\nA simple yet convenient bash script to create a semantic version tag and push it to the git remote."
+  command=$([[ "$0" = "bash" ]] && echo "curl -s https://raw.githubusercontent.com/simbo/release-version-script/latest/release-version.sh | bash -s" || echo $0)
   printf "\n\nUsage:\n  $command <UPDATE>"
   printf "\n\nParameters:"
   printf "\n  UPDATE (required)  should be either 'major', 'minor' or 'patch'"
@@ -103,14 +111,15 @@ case $semverUpdate in
 esac
 
 # inform about changes and ask to continue
+displayBanner
 branchColor=$([[ "$currentBranch" = "main" || "$currentBranch" = "master" ]] && echo "$green" || echo "$red")
-printf "\nCurrent Branch:  ${branchColor}${bold}${currentBranch}${normal}"
-printf "\n\nLatest Version:  $([[ $noLatestVersion ]] && echo "${red}${bold}N/A${normal}" || echo "${bold}${latestVersion}${normal}")"
-printf "\n\nNew Version:     ${yellow}${bold}${newVersion}${normal}"
-printf "\n\nThis will create a version tag and push it to the git remote."
+printf "\n\n   Current Branch:   ${branchColor}${bold}${currentBranch}${normal}"
+printf "\n\n   Latest Version:   $([[ $noLatestVersion ]] && echo "${red}${bold}N/A${normal}" || echo "${bold}${latestVersion}${normal}")"
+printf "\n\n   New Version:      ${yellow}${bold}${newVersion}${normal}"
+printf "\n\nContinue to create the version tag and push it to the git remote."
 [[ -f package.json ]] && printf "\nThe version field in the package.json will be updated and committed."
 printf "\n${gray}(press ANY KEY to continue or CTRL-C to cancel)${normal}\n"
-read -rsn1
+read -rs -n 1
 printf "\n"
 
 # message for tag and commit

@@ -113,7 +113,7 @@ read -rsn1
 printf "\n"
 
 # message for tag and commit
-$message="Release ${newVersion}"
+message="Release ${newVersion}"
 
 # exit on errors
 set -e

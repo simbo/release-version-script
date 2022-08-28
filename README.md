@@ -26,13 +26,9 @@ the new version.
 You can use the script directly in your `package.json` scripts:
 
 ```json
-{
-  ...
   "scripts": {
     "release": "curl -s https://raw.githubusercontent.com/simbo/release-version-script/latest/release-version.sh | bash -s"
   },
-  ...
-}
 ```
 
 …and call it with `npm`:

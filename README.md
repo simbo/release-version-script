@@ -8,9 +8,11 @@ When calling for either a `major`, `minor` or `patch` update the script will
 find the latest version in your git tags, create a respective new version, set
 it as the tag for the current commit and push it to the remote.
 
+It should work with Mac, Linux and Windows (with WSL).
+
 ## Usage
 
-You can integrate the script into your project or use it via curl:
+You can integrate `release-version.sh` into your project or use it via curl:
 
 ```sh
 curl -s https://raw.githubusercontent.com/simbo/release-version-script/latest/release-version.sh | bash -s <UPDATE>
@@ -18,12 +20,28 @@ curl -s https://raw.githubusercontent.com/simbo/release-version-script/latest/re
 
 The parameter `UPDATE` is required and should be either `major`, `minor` or `patch`.
 
+### In any kind of Project
+
+You can either copy `release-version.sh` into your project or use these commands
+to create a script that calls the latest version of the release script via curl:
+
+```sh
+echo -e '#!/bin/bash\ncurl -s https://raw.githubusercontent.com/simbo/release-version-script/latest/release-version.sh | bash -s $1' > release.sh
+chmod +x release.sh
+```
+
+…and call it like this:
+
+```sh
+release.sh <UPDATE>
+```
+
 ### In node.js Projects
 
 When your project contains a `package.json` it will be automatically updated to
-the new version.
+the new version when using the release script.
 
-You can use the script directly in your `package.json` scripts:
+You can use the release script via curl directly in your `package.json` scripts:
 
 ```json
   "scripts": {

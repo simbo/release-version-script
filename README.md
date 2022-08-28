@@ -2,7 +2,7 @@ release version script
 ======================
 
 A simple yet convenient bash script to create a semantic version tag and push it
-to a git remote.
+to the git remote.
 
 When calling for either a `major`, `minor` or `patch` update the script will
 find the latest version in your git tags, create a respective new version, set

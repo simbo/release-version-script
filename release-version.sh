@@ -33,7 +33,7 @@ semverUpdate=$(echo "$1" | tr [A-Z] [a-z])
 if ! [[ "$semverUpdate" = "major" || "$semverUpdate" = "minor" || "$semverUpdate" = "patch" ]]; then
   printf "\n${yellow}${bold}release version script${normal}"
   printf "\n${blue}${underline}https://github.com/simbo/release-version-script${normal}"
-  printf "\n\nA simple bash script to release semantic version tags to a git remote."
+  printf "\n\nA simple yet convenient bash script to create a semantic version tag and push it to the git remote."
   printf "\n\nUsage:\n  ${0:-"curl -s https://raw.githubusercontent.com/simbo/release-version-script/latest/release-version.sh | bash -s"} <UPDATE>"
   printf "\n\nParameters:"
   printf "\n  UPDATE (required)  should be either 'major', 'minor' or 'patch'"

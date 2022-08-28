@@ -15,7 +15,7 @@ It should work with Mac, Linux and Windows (with WSL).
 You can integrate `release-version.sh` into your project or use it via curl:
 
 ```sh
-curl -s https://raw.githubusercontent.com/simbo/release-version-script/latest/release-version.sh | bash -s <UPDATE>
+curl -so- https://raw.githubusercontent.com/simbo/release-version-script/latest/release-version.sh | bash -s <UPDATE>
 ```
 
 The parameter `UPDATE` is required and should be either `major`, `minor` or `patch`.
@@ -26,7 +26,7 @@ You can either copy `release-version.sh` into your project or use these commands
 to create a script that calls the latest version of the release script via curl:
 
 ```sh
-echo -e '#!/bin/bash\ncurl -s https://raw.githubusercontent.com/simbo/release-version-script/latest/release-version.sh | bash -s $1' > release.sh
+echo -e '#!/bin/bash\ncurl -so- https://raw.githubusercontent.com/simbo/release-version-script/latest/release-version.sh | bash -s $1' > release.sh
 chmod +x release.sh
 ```
 
@@ -45,7 +45,7 @@ You can use the release script via curl directly in your `package.json` scripts:
 
 ```json
   "scripts": {
-    "release": "curl -s https://raw.githubusercontent.com/simbo/release-version-script/latest/release-version.sh | bash -s"
+    "release": "curl -so- https://raw.githubusercontent.com/simbo/release-version-script/latest/release-version.sh | bash -s"
   },
 ```
 

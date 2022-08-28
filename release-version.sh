@@ -22,5 +22,5 @@ normal=$(tput -T$term sgr0)
 # fetch tags from origin
 # git fetch origin --tags > /dev/null 2>&1
 
-printf "\n${yellow}$1${normal}\n"
+printf "\n${yellow}$0 $1${normal}\n"
 

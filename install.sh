@@ -40,7 +40,7 @@ script=$(curl -so- https://raw.githubusercontent.com/simbo/release-version-scrip
 if [[ "${script:0:3}" = "404" ]]; then
   t="${TERM:-"dumb"}"; printf "\n$(tput -T$t setaf 1)ERROR: version '${VERSION}' not found$(tput -T$t sgr0)\n"; exit 1
 fi
-echo -e "$script" | bash -s $1
+bash -c "$script" -s $1
 EOF
 chmod +x $script
 

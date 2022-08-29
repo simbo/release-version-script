@@ -92,13 +92,15 @@ case $update in
     ;;
 esac
 
+pkg=$([[ -f package.json ]] && grep -q "\"version\":" package.json && echo true || echo false)
+
 # inform about changes and ask to continue
 banner
 printf "\n\n   Current Branch:   $([[ "$branch" = "main" || "$branch" = "master" ]] && echo "$g" || echo "$r")${b}${branch}${x}"
 printf "\n\n   Latest Version:   $([[ "$latest" = "v0.0.0" ]] && echo "${r}${b}N/A${x}" || echo "${b}${latest}${x}")"
 printf "\n\n   New Version:      ${y}${b}${new}${x}"
 printf "\n\nContinue to create the version tag and push it to the git remote."
-[[ -f package.json ]] && printf "\nThe version field in the package.json will be updated and committed."
+$pkg && printf "\nThe version field in the package.json will be updated and committed."
 printf "\n\n${gr}(press ANY KEY to continue or ESCAPE to cancel)${x}\n"
 read -rsn1 key
 
@@ -119,7 +121,7 @@ message="Release ${new}"
 set -e
 
 # update and commit package.json if present
-if [[ -f package.json ]]; then
+if $pkg; then
   xsed "s/(\"version\":[[:space:]]*\")(.+)(\")/\1${new}\3/g" package.json
   git add package.json
   git commit -m "$message"

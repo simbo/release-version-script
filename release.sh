@@ -60,9 +60,9 @@ if ! [[ "$ref" = "refs/heads/"* ]]; then
   error "current ref is not a regular branch"
 fi
 branch=${ref:11}
-# if ! [ -z "$(git status --porcelain)" ]; then
-#   error "git status is dirty\n${x}Please commit or stash first."
-# fi
+if ! [ -z "$(git status --porcelain)" ]; then
+  error "git status is dirty\n${x}Please commit or stash first."
+fi
 
 # delete local version tags and fetch from origin
 git tag -d $(git tag -l | grep -E "^(v[0-9]+(\.[0-9])?(\.[0-9]+)?|latest)$") > /dev/null 2>&1

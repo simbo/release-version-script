@@ -9,7 +9,7 @@ b=$(tput -T$t setaf 12)
 u=$(tput -T$t smul)
 x=$(tput -T$t sgr0)
 
-script="release"
+script="release.sh"
 
 if [[ -f $script ]] && ! grep -q "simbo/release-version-script" $script; then
   printf "\n${r}ERROR: file '${script}' already exists\n"

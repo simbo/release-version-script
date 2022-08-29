@@ -21,11 +21,11 @@ Run this command in your project's root directory to install the release script:
 curl -o- https://raw.githubusercontent.com/simbo/release-version-script/latest/install.sh | bash
 ```
 
-Afterward, you can run the `./release` command at any time to create and push a
-new tag with semantic versioning:
+Afterward, you can run the `./release.sh` command at any time to create and push
+a new tag with semantic versioning:
 
 ```sh
-./release UPDATE
+./release.sh UPDATE
 ```
 
 Allowed values for `UPDATE` are `major`, `minor` or `patch`.

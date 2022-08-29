@@ -45,7 +45,7 @@ if ! [[ "$update" = "major" || "$update" = "minor" || "$update" = "patch" ]]; th
   exit 1
 fi
 
-# test if everything is prepar
+# test if everything is prepared
 if ! command -v git &> /dev/null; then
   error "command 'git' is not available"
 fi

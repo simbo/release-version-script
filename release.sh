@@ -122,7 +122,7 @@ set -e
 
 # update and commit package.json if present
 if $pkg; then
-  xsed "s/(\"version\":[[:space:]]*\")(.+)(\")/\1${new}\3/g" package.json
+  xsed "s/(\"version\":[[:space:]]*\")(.+)(\")/\1${new:1}\3/g" package.json
   git add package.json
   git commit -m "$message"
 fi

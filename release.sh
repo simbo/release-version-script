@@ -96,6 +96,7 @@ pkg=$([[ -f package.json ]] && grep -q "\"version\":" package.json && echo true 
 
 # inform about changes and ask to continue
 banner
+printf "\n\n   Repository:       ${b}$(basename $(pwd -P))${x}"
 printf "\n\n   Current Branch:   $([[ "$branch" = "main" || "$branch" = "master" ]] && echo "$g" || echo "$r")${b}${branch}${x}"
 printf "\n\n   Latest Version:   $([[ "$latest" = "v0.0.0" ]] && echo "${r}${b}N/A${x}" || echo "${b}${latest}${x}")"
 printf "\n\n   New Version:      ${y}${b}${new}${x}"

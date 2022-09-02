@@ -40,7 +40,7 @@ if ! [[ "$update" = "major" || "$update" = "minor" || "$update" = "patch" ]]; th
   printf "\n   ${gr}Author: Simon Lepel ${u}https://simbo.de/${x}"
   printf "\n   ${gr}License: MIT ${u}http://simbo.mit-license.org/${x}"
   printf "\n\nA simple yet convenient bash script to create a semantic version tag and push it to the git remote."
-  printf "\n\nUsage:\n\n  $0 UPDATE"
+  printf "\n\nUsage:\n\n  ./release.sh UPDATE"
   printf "\n\nAllowed values for UPDATE are \"major\", \"minor\" or \"patch\".\n"
   exit 1
 fi

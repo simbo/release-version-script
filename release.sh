@@ -131,4 +131,13 @@ git tag -a -m "$message" $new
 git push origin $branch
 git push origin $new
 
+# link to github releases
+gitURL=$(git remote -v | grep "(push)" | grep -m1 origin | xsed 's/^origin[[:blank:]]+|\.git[[:blank:]]+\(push\)$//g')
+if echo "$gitURL" | grep -q github.com ; then
+  if [[ "$gitURL" = "git@"* ]]; then
+    gitURL=$(echo "$gitURL" | xsed 's/git@(github\.com):/http:\/\/\1\//')
+  fi
+  printf "\nReleases on GitHub: ${bl}${u}${gitURL}/releases${x}\n"
+fi
+
 printf "\n✅ ${g}Done!${x}\n"

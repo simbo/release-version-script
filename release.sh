@@ -24,11 +24,9 @@ function error() {
 }
 
 function xsed() {
-  if [ "$(uname -s | xargs)" = "Darwin" ]; then
-    sed -E -i "" -e "$@"
-  else
-    sed -r -i -e "$@"
-  fi
+  x=$([[ "$(uname -s)" = "Darwin" ]] && echo true || echo false)
+  if $x; then r="-E"; else r="-r"; fi
+  if [[ "$2" = "" ]]; then sed $r -e "$@"; elif $x; then sed $r -i "" -e "$@"; else sed $r -i -e "$@"; fi
 }
 
 # input param to lowercase

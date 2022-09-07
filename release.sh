@@ -137,7 +137,7 @@ if echo "$gitURL" | grep -q github.com ; then
   if [[ "$gitURL" = "git@"* ]]; then
     gitURL=$(echo "$gitURL" | xsed 's/git@(github\.com):/http:\/\/\1\//')
   fi
-  printf "\nReleases on GitHub: ${bl}${u}${gitURL}/releases${x}\n"
+  printf "\nReleases on GitHub:\n${bl}${u}${gitURL}/releases${x}\n"
 fi
 
 printf "\n✅ ${g}Done!${x}\n"

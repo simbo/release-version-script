@@ -119,6 +119,10 @@ message="Release ${new}"
 # exit on errors
 set -e
 
+# fetch and pull
+git fetch origin
+git pull origin
+
 # update and commit package.json if present
 if $pkg; then
   xsed "s/(\"version\":[[:space:]]*\")(.+)(\")/\1${new:1}\3/g" package.json

@@ -127,6 +127,10 @@ git pull origin
 if $pkg; then
   xsed "s/(\"version\":[[:space:]]*\")(.+)(\")/\1${new:1}\3/g" package.json
   git add package.json
+  if [[ -f package-lock.json ]]; then
+    npm install
+    git add package-lock.json
+  fi
   git commit -m "$message"
 fi
 

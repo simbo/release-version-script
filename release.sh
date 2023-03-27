@@ -148,4 +148,4 @@ if echo "$gitURL" | grep -q github.com ; then
   printf "\nReleases on GitHub:\n${bl}${u}${gitURL}/releases${x}\n"
 fi
 
-printf "\n✅ ${g}Done!${x}\n"
+printf "\n✅ ${g}Done${x}\n"

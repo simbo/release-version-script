@@ -9,13 +9,13 @@ gr=$(tput -T$t setaf 8)
 bl=$(tput -T$t setaf 12)
 b=$(tput -T$t bold)
 u=$(tput -T$t smul)
-x=$(tput -T$t sgr0)
+n=$(tput -T$t sgr0)
 
 function banner() {
-  printf "\n${m}┌───────────────────────────────────────────────────┐${x}"
-  printf "\n${m}│  ${y}RELEASE VERSION SCRIPT${m}                           │${x}"
-  printf "\n${m}│  ${bl}${u}https://github.com/simbo/release-version-script${x}${m}  │${x}"
-  printf "\n${m}└───────────────────────────────────────────────────┘${x}"
+  printf "\n${m}┌───────────────────────────────────────────────────┐${n}"
+  printf "\n${m}│  ${y}RELEASE VERSION SCRIPT${m}                           │${n}"
+  printf "\n${m}│  ${bl}${u}https://github.com/simbo/release-version-script${n}${m}  │${n}"
+  printf "\n${m}└───────────────────────────────────────────────────┘${n}"
 }
 
 function error() {
@@ -35,8 +35,8 @@ update=$(echo "$1" | tr [A-Z] [a-z])
 # display usage info if params are not set or invalid
 if ! [[ "$update" = "major" || "$update" = "minor" || "$update" = "patch" ]]; then
   banner
-  printf "\n   ${gr}Author: Simon Lepel ${u}https://simbo.de/${x}"
-  printf "\n   ${gr}License: MIT ${u}http://simbo.mit-license.org/${x}"
+  printf "\n   ${gr}Author: Simon Lepel ${u}https://simbo.de/${n}"
+  printf "\n   ${gr}License: MIT ${u}http://simbo.mit-license.org/${n}"
   printf "\n\nA simple yet convenient bash script to create a semantic version tag and push it to the git remote."
   printf "\n\nUsage:\n\n  ./release.sh UPDATE"
   printf "\n\nAllowed values for UPDATE are \"major\", \"minor\" or \"patch\".\n"
@@ -59,7 +59,7 @@ if ! [[ "$ref" = "refs/heads/"* ]]; then
 fi
 branch=${ref:11}
 if ! [ -z "$(git status --porcelain)" ]; then
-  error "git status is dirty\n${x}Please commit or stash first."
+  error "git status is dirty\n${n}Please commit or stash first."
 fi
 
 # delete local version tags and fetch from origin
@@ -94,13 +94,13 @@ pkg=$([[ -f package.json ]] && grep -q "\"version\":" package.json && echo true 
 
 # inform about changes and ask to continue
 banner
-printf "\n\n   Repository:       ${b}$(basename $(pwd -P))${x}"
-printf "\n\n   Current Branch:   $([[ "$branch" = "main" || "$branch" = "master" ]] && echo "$g" || echo "$r")${b}${branch}${x}"
-printf "\n\n   Latest Version:   $([[ "$latest" = "v0.0.0" ]] && echo "${r}${b}N/A${x}" || echo "${b}${latest}${x}")"
-printf "\n\n   New Version:      ${y}${b}${new}${x}"
+printf "\n\n   Repository:       ${b}$(basename $(pwd -P))${n}"
+printf "\n\n   Current Branch:   $([[ "$branch" = "main" || "$branch" = "master" ]] && echo "$g" || echo "$r")${b}${branch}${n}"
+printf "\n\n   Latest Version:   $([[ "$latest" = "v0.0.0" ]] && echo "${r}${b}N/A${n}" || echo "${b}${latest}${n}")"
+printf "\n\n   New Version:      ${y}${b}${new}${n}"
 printf "\n\nContinue to create the version tag and push it to the git remote."
 $pkg && printf "\nThe version field in the package.json will be updated and committed."
-printf "\n\n${gr}(press ANY KEY to continue or ESCAPE to cancel)${x}\n"
+printf "\n\n${gr}(press ANY KEY to continue or ESCAPE to cancel)${n}\n"
 read -rsn1 key
 
 # remove continue hint
@@ -109,7 +109,7 @@ tput -T$t el
 
 # exit on escape
 if [[ $key = $'\e' ]]; then
-  printf "${gr}Cancelled.${x}\n"
+  printf "${gr}Cancelled.${n}\n"
   exit 1
 fi
 
@@ -145,7 +145,7 @@ if echo "$gitURL" | grep -q github.com ; then
   if [[ "$gitURL" = "git@"* ]]; then
     gitURL=$(echo "$gitURL" | xsed 's/git@(github\.com):/http:\/\/\1\//')
   fi
-  printf "\nReleases on GitHub:\n${bl}${u}${gitURL}/releases${x}\n"
+  printf "\nReleases on GitHub:\n${bl}${u}${gitURL}/releases${n}\n"
 fi
 
-printf "\n✅ ${g}"'Done!'"\n${x}"
+printf "\n✅ ${g}"'Done!'"\n${n}"

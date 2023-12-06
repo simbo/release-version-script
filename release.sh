@@ -63,11 +63,11 @@ if ! [ -z "$(git status --porcelain)" ]; then
 fi
 
 # delete local version tags and fetch from origin
-git tag -d $(git tag -l | grep -E "^(v[0-9]+(\.[0-9])?(\.[0-9]+)?|latest)$") > /dev/null 2>&1
+git tag -d $(git tag -l | grep -E "^(v?[0-9]+(\.[0-9]+)?(\.[0-9]+)?|latest)$") > /dev/null 2>&1
 git fetch origin --tags > /dev/null 2>&1
 
 # get latest version from git tags
-latest=$(git tag -l | grep -E "^(v[0-9]+(\.[0-9])?(\.[0-9]+)?)$" | sort -Vr | head -n 1)
+latest=$(git tag -l | grep -E "^(v?[0-9]+(\.[0-9]+)?(\.[0-9]+)?)$" | sort -Vr | head -n 1)
 if [[ "$latest" = "" ]]; then
   latest="v0.0.0"
 fi
